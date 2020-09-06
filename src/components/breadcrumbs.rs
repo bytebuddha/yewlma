@@ -38,7 +38,7 @@ impl Component for BreadCrumbs {
 
     fn view(&self) -> Html {
         if let Some(crumbs) = &self.props.crumbs {
-            let length = crumbs.len();
+            let length = crumbs.len() - 1;
             html! {
               <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
