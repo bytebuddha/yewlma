@@ -13,3 +13,8 @@ pub use self::table::Table;
 mod pagination;
 #[cfg(feature = "paginator")]
 pub use self::pagination::Pagination;
+
+#[cfg(feature = "yew-route-breadcrumbs")]
+mod breadcrumbs;
+#[cfg(feature = "yew-route-breadcrumbs")]
+pub use self::breadcrumbs::BreadCrumbs;
