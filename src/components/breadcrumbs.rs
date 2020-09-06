@@ -38,15 +38,17 @@ impl Component for BreadCrumbs {
 
     fn view(&self) -> Html {
         if let Some(crumbs) = &self.props.crumbs {
+            let length = crumbs.len();
             html! {
               <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                   {
-                      for crumbs.iter().map(|item| {
+                      for crumbs.iter().enumerate().map(|(dex, item)| {
                           let route = item.route.clone();
                           let callback = self.link.callback(move |_| Clicked(route));
+                          let active = (dex == length).then_some("is-active");
                           html_nested!{
-                              <li><a onclick=callback>{item.text}</a></li>
+                              <li class=active><a onclick=callback>{item.text}</a></li>
                       }})
                   }
                 </ul>
