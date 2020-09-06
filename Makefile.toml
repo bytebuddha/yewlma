@@ -1,0 +1,22 @@
+[tasks.build-demo]
+disable = true
+workspace = false
+script = [
+    "wasm-pack build examples/demo --target web --out-dir pkg",
+    "rollup ./examples/demo/main.js --format iife --file ./examples/demo/pkg/bundle.js"
+]
+
+[tasks.serve-demo]
+disable = true
+workspace = false
+script = [
+    "basic-http-server examples/demo"
+]
+
+[tasks.demo]
+disable = true
+workspace = false
+dependencies = [
+    "build-demo",
+    "serve-demo"
+]
