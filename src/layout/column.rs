@@ -8,7 +8,7 @@ pub type Column = Pure<PureColumn>;
 #[derive(Debug, PartialEq, Clone, Properties)]
 pub struct PureColumn {
     #[prop_or_default]
-    pub id: String,
+    pub id: Option<String>,
     #[prop_or("div")]
     pub tag: &'static str,
     #[prop_or_default]
@@ -30,7 +30,7 @@ impl PureComponent for PureColumn {
         let offset = self.offset.is_offset();
         html! {
             <@{self.tag}
-                id=&self.id
+                id?=self.id.as_ref()
                 class=("column", size, offset, narrow, &self.class)>
                 { self.children.clone() }
             </@>

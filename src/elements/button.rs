@@ -19,7 +19,7 @@ pub struct Button<SW: Switch + Clone + 'static = NullSwitchImplementor, STATE: R
 #[derive(Debug, Clone, Properties)]
 pub struct Props<SW: Switch + Clone + 'static> {
     #[prop_or_default]
-    pub id: String,
+    pub id: Option<String>,
     #[prop_or("button")]
     pub tag: &'static str,
     #[prop_or_default]
@@ -95,7 +95,7 @@ impl<SW: Switch + Clone + 'static, STATE: RouterState> Component for Button<SW, 
         let fullwidth = self.props.fullwidth.then_some("is-fullwidth");
         html! {
             <@{self.props.tag}
-                 id=self.props.id
+                 id?=self.props.id.as_ref()
                  disabled=self.props.disabled
                  onclick=self.link.callback(|_| Msg::Clicked)
                  class=(

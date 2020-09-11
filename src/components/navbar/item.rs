@@ -18,7 +18,7 @@ pub struct Item<SW: Switch + Clone + 'static = NullSwitchImplementor, STATE: Rou
 #[derive(Debug, Clone, Properties)]
 pub struct Props<SW: Switch + Clone + 'static> {
     #[prop_or_default]
-    pub id: String,
+    pub id: Option<String>,
     #[prop_or("a")]
     pub tag: &'static str,
     #[prop_or_default]
@@ -65,7 +65,7 @@ impl<SW: Switch + Clone + 'static, STATE: RouterState> Component for Item<SW, ST
     fn view(&self) -> Html {
         html! {
             <@{self.props.tag}
-                 id=self.props.id
+                 id?=self.props.id.as_ref()
                  onclick=self.link.callback(|_| Msg::Clicked)
                  class=(
                      "navbar-item", &self.props.class

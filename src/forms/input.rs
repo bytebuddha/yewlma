@@ -15,7 +15,7 @@ pub struct InputField {
 #[derive(Debug, Clone, PartialEq, Properties)]
 pub struct Props {
     #[prop_or_default]
-    pub name: String,
+    pub name: Option<String>,
     #[prop_or("text".into())]
     pub ty: String,
     #[prop_or_default]
@@ -27,7 +27,7 @@ pub struct Props {
     #[prop_or_default]
     pub size: Option<Size>,
     #[prop_or_default]
-    pub placeholder: String,
+    pub placeholder: Option<String>,
     #[prop_or_default]
     pub value: Option<String>,
     #[prop_or_default]
@@ -88,9 +88,9 @@ impl Component for InputField {
             <div class="field">
               {label}
               <div class=("control", loading)>
-                <input name=self.props.name
+                <input name?=self.props.name.as_ref()
+                       placeholder?=self.props.placeholder.as_ref()
                        type=&self.props.ty
-                       placeholder=&self.props.placeholder
                        onchange=self.link.callback(Msg::Changed)
                        value=self.value
                        disabled=self.props.disabled

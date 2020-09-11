@@ -14,7 +14,7 @@ pub struct TextAreaField {
 #[derive(Debug, Clone, PartialEq, Properties)]
 pub struct Props {
     #[prop_or_default]
-    pub name: String,
+    pub name: Option<String>,
     #[prop_or("text".into())]
     pub ty: String,
     #[prop_or_default]
@@ -26,7 +26,7 @@ pub struct Props {
     #[prop_or_default]
     pub size: Option<Size>,
     #[prop_or_default]
-    pub placeholder: String,
+    pub placeholder: Option<String>,
     #[prop_or_default]
     pub value: Option<String>,
     #[prop_or_default]
@@ -91,10 +91,10 @@ impl Component for TextAreaField {
                         html_nested! {}
                     }
                 }
-                <textarea name=self.props.name
+                <textarea name?=self.props.name.as_ref()
                        type=&self.props.ty
                        value=value
-                       placeholder=&self.props.placeholder
+                       placeholder?=self.props.placeholder.as_ref()
                        onchange=self.link.callback(Msg::Changed)
                        disabled=self.props.disabled
                        class=("textarea", color, round, size, &self.props.class)/>
