@@ -1,6 +1,6 @@
 use yew::prelude::*;
 use yewtil::NeqAssign;
-use yew_route_breadcrumbs::StaticCrumb;
+use yew_route_breadcrumbs::Crumb;
 use yew_router::prelude::*;
 use yew_router::agent::RouteRequest;
 
@@ -13,7 +13,7 @@ pub struct Clicked(Option<&'static str>);
 
 #[derive(Debug, PartialEq, Clone, Properties)]
 pub struct Props {
-    pub crumbs: Option<Vec<StaticCrumb>>
+    pub crumbs: Option<Vec<Crumb>>
 }
 
 impl Component for BreadCrumbs {
